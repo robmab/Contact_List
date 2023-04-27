@@ -1,0 +1,43 @@
+/* * {
+  border: 1px solid red;
+} */
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*HOME WRAPPER*/
+
+.wrapper-formulary {
+  display: flex;
+  flex-direction: column;
+  width: 58rem;
+}
+
+.wrapper-formulary > h1 {
+  margin: 50px auto 10px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form button {
+  width: 100% !important;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group *,
+.wrapper-formulary a {
+  font-weight: 600;
+  font-size: 17px;
+}
+.form-group > input {
+  margin-top: 6px;
+}
