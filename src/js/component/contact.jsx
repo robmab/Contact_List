@@ -1,9 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import "../../styles/contact.css";
-
-import { Context } from "../store/appContext";
 
 /* npm install --save @fortawesome/react-fontawesome */
 /* npm install --save @fortawesome/free-solid-svg-icons */
@@ -18,9 +16,6 @@ import {
 
 //create your first component
 export const Contact = (props) => {
-  const { state } = useContext(Context);
-  
-
   return (
     <div id={props.id} className="contact">
       {/* CONTACT */}
@@ -47,7 +42,7 @@ export const Contact = (props) => {
         </p>
       </div>
       <div className="contact-rigth">
-        <Link to="/add-contact" state={{ data: props }}>
+        <Link to={`/add-contact/${props.id}`} /* state={{ data: props }} */>
           <FontAwesomeIcon icon={faPencil} />
         </Link>
         <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">

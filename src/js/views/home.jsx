@@ -10,16 +10,17 @@ import { Contact } from "../component/contact.jsx";
 export const Home = () => {
   const { store } = useContext(Context);
 
-  const [contacts, setContacts] = useState(store);
+  const [contacts] = useState(store);
   return (
     <div className="wrapper-home">
-      <button type="button" className="btn btn-success">
-        <Link to="add-contact">Add new contact</Link>
-      </button>
+      <Link className="btn btn-success" to="add-contact">
+        Add new contact
+      </Link>
 
       {contacts.map((x, y) => (
         <Contact
           key={y}
+          id={y}
           name={x.name}
           email={x.email}
           phone={x.phone}

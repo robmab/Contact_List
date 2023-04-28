@@ -35,14 +35,21 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
     ],
     actions: {
-      addData: (contact) => {
-        const gender= ["men","women"]
-        contact.gender= gender[Math.floor(Math.random()*2)]
-        contact.img = Math.floor(Math.random()*99+1)
-        
+      modifyData: (contact, param) => {
         const store = getStore();
-        store.push(contact)
-        console.log(contact);
+        contact.gender = store[param].gender;
+        contact.img = store[param].img;
+
+        store[param] = contact;
+        setStore(store);
+      },
+      addData: (contact) => {
+        const gender = ["men", "women"];
+        contact.gender = gender[Math.floor(Math.random() * 2)];
+        contact.img = Math.floor(Math.random() * 99 + 1);
+
+        const store = getStore();
+        setStore([contact, ...store]);
       },
       // Use getActions to call a function within a fuction
       exampleFunction: () => {

@@ -16,16 +16,12 @@
   width: 58rem;
 }
 
-.wrapper-home > button {
-  margin: 10px 0 15px auto; /* ms-auto */
-}
-.wrapper-home > button > a {
+.wrapper-home > a {
+  margin: 10px 0 15px auto;
   color: white;
-  text-decoration: none;
+  text-decoration: none; /* ms-auto */
 }
 
 .wrapper-home > div:nth-child(2) {
   border-top: 2px rgba(199, 199, 199, 0.362) solid !important;
 }
-
-
