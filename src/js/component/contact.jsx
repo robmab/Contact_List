@@ -1,5 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 import "../../styles/contact.css";
 
@@ -16,6 +17,14 @@ import {
 
 //create your first component
 export const Contact = (props) => {
+  const { store, actions } = useContext(Context);
+
+  const deleteContact = (e) => {
+    actions.deleteData(Number(e.target.id));
+
+    props.setContacts(store.contactList);
+  };
+
   return (
     <div id={props.id} className="contact">
       {/* CONTACT */}
@@ -45,7 +54,12 @@ export const Contact = (props) => {
         <Link to={`/add-contact/${props.id}`} /* state={{ data: props }} */>
           <FontAwesomeIcon icon={faPencil} />
         </Link>
-        <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <a
+          id={props.id}
+          href=""
+          data-bs-toggle="modal"
+          data-bs-target={"#exampleModal" + props.id}
+        >
           <FontAwesomeIcon icon={faTrashCan} />
         </a>
       </div>
@@ -53,15 +67,18 @@ export const Contact = (props) => {
       {/* MODAL */}
       <div
         className="modal fade"
-        id="exampleModal"
+        id={"exampleModal" + props.id}
         tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby={"exampleModalLabel" + props.id}
         aria-hidden="true"
       >
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">
+              <h1
+                className="modal-title fs-5"
+                id={"exampleModalLabel" + props.id}
+              >
                 Are you sure?
               </h1>
               <button
@@ -82,7 +99,13 @@ export const Contact = (props) => {
               >
                 Oh no!
               </button>
-              <button type="button" className="btn btn-secondary ">
+              <button
+                id={props.id}
+                onClick={deleteContact}
+                type="button"
+                className="btn btn-secondary "
+                data-bs-dismiss="modal"
+              >
                 Yes baby!
               </button>
             </div>
@@ -93,3 +116,8 @@ export const Contact = (props) => {
     </div>
   );
 };
+
+/* Para que el modal detecte el id del contacto al darle a borrar,
+ es necesario que el identificador del propio modal sea único, 
+ por lo que aprovechamos el id de props para asociarlo tanto a 
+ aria-labelledby como al id del modal y asi que el modal sea único. */

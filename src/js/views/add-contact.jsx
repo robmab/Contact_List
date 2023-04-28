@@ -15,41 +15,47 @@ export const AddContact = () => {
   /*  const location = useLocation();
   const data = location.state?.data; */
 
-  const [nameValue, setnameValue] = useState(param ? store[param].name : "");
-  const [emailValue, setemailValue] = useState(param ? store[param].email : "");
-  const [phoneValue, setphoneValue] = useState(param ? store[param].phone : "");
+  const [nameValue, setnameValue] = useState(
+    param ? store.contactList[param].name : ""
+  );
+  const [emailValue, setemailValue] = useState(
+    param ? store.contactList[param].email : ""
+  );
+  const [phoneValue, setphoneValue] = useState(
+    param ? store.contactList[param].phone : ""
+  );
   const [addressValue, setaddressValue] = useState(
-    param ? store[param].address : ""
+    param ? store.contactList[param].address : ""
   );
 
   const formulary = (e) => {
     e.preventDefault();
 
-    if (e.target[0].value === "") {
+    if (nameValue === "") {
       alert("Add full name please.");
       return;
     }
 
-    if (e.target[1].value === "") {
+    if (emailValue === "") {
       alert("Add email please.");
       return;
     }
 
-    if (e.target[2].value === "") {
+    if (phoneValue === "") {
       alert("Add phone please.");
       return;
     }
 
-    if (e.target[3].value === "") {
+    if (addressValue === "") {
       alert("Add address please.");
       return;
     }
 
     const contactData = {
-      name: e.target[0].value,
-      email: e.target[1].value,
-      phone: e.target[2].value,
-      address: e.target[3].value,
+      name: nameValue,
+      email: emailValue,
+      phone: phoneValue,
+      address: addressValue,
     };
 
     setnameValue("");
@@ -79,7 +85,7 @@ export const AddContact = () => {
               className="form-control"
               id="fullName"
               aria-describedby="emailHelp"
-              placeholder={param ? store[param].name : "Full Name"}
+              placeholder={param ? store.contactList[param].name : "Full Name"}
             />
           </div>
           <div className="form-group">
@@ -91,7 +97,9 @@ export const AddContact = () => {
               className="form-control"
               id="email"
               aria-describedby="emailHelp"
-              placeholder={param ? store[param].email : "Enter email"}
+              placeholder={
+                param ? store.contactList[param].email : "Enter email"
+              }
             />
           </div>
           <div className="form-group">
@@ -103,7 +111,9 @@ export const AddContact = () => {
               className="form-control"
               id="phone"
               aria-describedby="emailHelp"
-              placeholder={param ? store[param].phone : "Enter phone"}
+              placeholder={
+                param ? store.contactList[param].phone : "Enter phone"
+              }
             />
           </div>
           <div className="form-group">
@@ -115,7 +125,9 @@ export const AddContact = () => {
               className="form-control"
               id="address"
               aria-describedby="emailHelp"
-              placeholder={param ? store[param].address : "Enter address"}
+              placeholder={
+                param ? store.contactList[param].address : "Enter address"
+              }
             />
           </div>
 

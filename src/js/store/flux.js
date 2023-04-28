@@ -1,46 +1,57 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
-    store: [
-      {
-        name: "Mike Anamendolla",
-        email: "mike.ana@example.com",
-        phone: "(870) 288-4149",
-        address: "5842 Hillcrest Rd",
-        gender: "men",
-        img: "10",
-      },
-      {
-        name: "Prueba",
-        email: "mike.ana@example.com",
-        phone: "(870) 288-4149",
-        address: "5842 Hillcrest Rd",
-        gender: "women",
-        img: "8",
-      },
-      {
-        name: "Mike Anamendolla",
-        email: "mike.ana@example.com",
-        phone: "(870) 288-4149",
-        address: "5842 Hillcrest Rd",
-        gender: "men",
-        img: "63",
-      },
-      {
-        name: "Mike Anamendolla",
-        email: "mike.ana@example.com",
-        phone: "(870) 288-4149",
-        address: "5842 Hillcrest Rd",
-        gender: "women",
-        img: "39",
-      },
-    ],
+    store: {
+      contactList: [
+        {
+          name: "Mike Anamendolla",
+          email: "mike.ana@example.com",
+          phone: "(870) 288-4149",
+          address: "5842 Hillcrest Rd",
+          gender: "men",
+          img: "10",
+        },
+        {
+          name: "Prueba",
+          email: "mike.ana@example.com",
+          phone: "(870) 288-4149",
+          address: "5842 Hillcrest Rd",
+          gender: "women",
+          img: "8",
+        },
+        {
+          name: "Mike Anamendolla",
+          email: "mike.ana@example.com",
+          phone: "(870) 288-4149",
+          address: "5842 Hillcrest Rd",
+          gender: "men",
+          img: "63",
+        },
+        {
+          name: "Mike Anamendolla",
+          email: "mike.ana@example.com",
+          phone: "(870) 288-4149",
+          address: "5842 Hillcrest Rd",
+          gender: "women",
+          img: "39",
+        },
+      ],
+    },
     actions: {
+      deleteData: (id) => {
+        const store = getStore();
+        store.contactList = store.contactList.filter((_, i) => i !== id);
+
+        setStore(store);
+        
+      },
       modifyData: (contact, param) => {
         const store = getStore();
-        contact.gender = store[param].gender;
-        contact.img = store[param].img;
 
-        store[param] = contact;
+        contact.gender = store.contactList[param].gender;
+        contact.img = store.contactList[param].img;
+
+        store.contactList[param] = contact;
+
         setStore(store);
       },
       addData: (contact) => {
@@ -49,7 +60,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         contact.img = Math.floor(Math.random() * 99 + 1);
 
         const store = getStore();
-        setStore([contact, ...store]);
+        setStore({ contactList: [contact, ...store.contactList] });
       },
       // Use getActions to call a function within a fuction
       exampleFunction: () => {

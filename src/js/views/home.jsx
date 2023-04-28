@@ -10,7 +10,7 @@ import { Contact } from "../component/contact.jsx";
 export const Home = () => {
   const { store } = useContext(Context);
 
-  const [contacts] = useState(store);
+  const [contacts, setContacts] = useState(store.contactList);
   return (
     <div className="wrapper-home">
       <Link className="btn btn-success" to="add-contact">
@@ -19,6 +19,7 @@ export const Home = () => {
 
       {contacts.map((x, y) => (
         <Contact
+          setContacts={setContacts}
           key={y}
           id={y}
           name={x.name}
