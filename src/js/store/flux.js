@@ -77,6 +77,23 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
           })
             .then((res) => {
+              if (!res.ok) throw Error(res.ok);
+              return res.json();
+            })
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((error) => console.log(error));
+        }
+
+        if (method === "delete") {
+          const id = contact
+
+          fetch(`https://assets.breatheco.de/apis/fake/contact/${id}`, {
+            method: "DELETE",
+          })
+            .then((res) => {
+              if (!res.ok) throw Error(res.ok);
               return res.json();
             })
             .then((data) => {
@@ -90,9 +107,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         contact.gender = gender[Math.floor(Math.random() * 2)];
         contact.img = Math.floor(Math.random() * 99 + 1);
 
-        const store = { contactList: [contact, ...getStore().contactList] };
-        setStore(store);
         getActions().fetchMethods("add", contact);
+
+        setTimeout(() => {
+          getActions().fetchMethods("get"); //Load id data from API, it need delay because it dont get data from updated contact
+        }, 600);
       },
       modifyData: (contact, param) => {
         const store = getStore();
@@ -106,6 +125,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       deleteData: (id) => {
         const store = getStore();
+        store.contactList.forEach((x, y) => {
+          if (y == id) getActions().fetchMethods("delete", x.id);
+        });
         store.contactList = store.contactList.filter((_, i) => i !== id);
 
         setStore(store);

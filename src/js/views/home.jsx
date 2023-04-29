@@ -7,6 +7,9 @@ import "../../styles/home.css";
 import { Contact } from "../component/contact.jsx";
 
 //create your first component
+
+
+
 export const Home = () => {
   const { store } = useContext(Context);
 

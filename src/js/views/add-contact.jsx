@@ -52,11 +52,11 @@ export const AddContact = () => {
     }
 
     const contactData = {
-      "full_name": nameValue,
-      "email": emailValue,
-      "phone": phoneValue,
-      "address": addressValue,
-      "agenda_slug": "robmab",
+      full_name: nameValue,
+      email: emailValue,
+      phone: phoneValue,
+      address: addressValue,
+      agenda_slug: "robmab",
     };
 
     setnameValue("");
@@ -66,7 +66,7 @@ export const AddContact = () => {
 
     if (param) actions.modifyData(contactData, param);
     else actions.addData(contactData);
-
+    
     navigate("/"); //redirect onSubmit
   };
 
