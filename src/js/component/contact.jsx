@@ -21,7 +21,6 @@ export const Contact = (props) => {
 
   const deleteContact = (e) => {
     actions.deleteData(Number(e.target.id));
-
     props.setContacts(store.contactList);
   };
 
@@ -35,7 +34,7 @@ export const Contact = (props) => {
         />
       </div>
       <div className="contact-center">
-        <h1>{props.name}</h1>
+        <h1>{props.full_name}</h1>
         <p>
           <FontAwesomeIcon icon={faLocationDot} />
 

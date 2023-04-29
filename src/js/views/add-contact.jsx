@@ -16,7 +16,7 @@ export const AddContact = () => {
   const data = location.state?.data; */
 
   const [nameValue, setnameValue] = useState(
-    param ? store.contactList[param].name : ""
+    param ? store.contactList[param].full_name : ""
   );
   const [emailValue, setemailValue] = useState(
     param ? store.contactList[param].email : ""
@@ -52,10 +52,11 @@ export const AddContact = () => {
     }
 
     const contactData = {
-      name: nameValue,
-      email: emailValue,
-      phone: phoneValue,
-      address: addressValue,
+      "full_name": nameValue,
+      "email": emailValue,
+      "phone": phoneValue,
+      "address": addressValue,
+      "agenda_slug": "robmab",
     };
 
     setnameValue("");

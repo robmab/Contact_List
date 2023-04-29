@@ -22,7 +22,7 @@ export const Home = () => {
           setContacts={setContacts}
           key={y}
           id={y}
-          name={x.name}
+          full_name={x.full_name}
           email={x.email}
           phone={x.phone}
           address={x.address}

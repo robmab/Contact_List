@@ -2,47 +2,97 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       contactList: [
-        {
-          name: "Mike Anamendolla",
+        /* {
+          full_name: "Mike Anamendolla",
           email: "mike.ana@example.com",
           phone: "(870) 288-4149",
           address: "5842 Hillcrest Rd",
           gender: "men",
           img: "10",
+          agenda_slug: "robmab",
         },
         {
-          name: "Prueba",
+          full_name: "Prueba",
           email: "mike.ana@example.com",
           phone: "(870) 288-4149",
           address: "5842 Hillcrest Rd",
           gender: "women",
           img: "8",
+          agenda_slug: "robmab",
         },
         {
-          name: "Mike Anamendolla",
+          full_name: "Mike Anamendolla",
           email: "mike.ana@example.com",
           phone: "(870) 288-4149",
           address: "5842 Hillcrest Rd",
           gender: "men",
           img: "63",
+          agenda_slug: "robmab",
         },
         {
-          name: "Mike Anamendolla",
+          full_name: "Mike Anamendolla",
           email: "mike.ana@example.com",
           phone: "(870) 288-4149",
           address: "5842 Hillcrest Rd",
           gender: "women",
           img: "39",
-        },
+          agenda_slug: "robmab",
+        }, */
       ],
     },
     actions: {
-      deleteData: (id) => {
-        const store = getStore();
-        store.contactList = store.contactList.filter((_, i) => i !== id);
+      fetchMethods: (method, contact) => {
+        if (method === "get") {
+          fetch("https://assets.breatheco.de/apis/fake/contact/agenda/robmab")
+            .then((res) => {
+              if (!res.ok) throw Error(res.ok);
+              return res.json();
+            })
+            .then((data) => {
+              const store = getStore();
 
+              data.forEach((item) => {
+                const [full_name, img, gender] = item.full_name.split("|"); //:O
+                item.full_name = full_name;
+                item.img = img;
+                item.gender = gender;
+
+                store.contactList.unshift(item);
+              });
+
+              setStore(store);
+            })
+            .catch((error) => console.log(error));
+        }
+
+        if (method === "add") {
+          contact.full_name =
+            contact.full_name + "|" + contact.img + "|" + contact.gender;
+
+          fetch("https://assets.breatheco.de/apis/fake/contact/", {
+            method: "POST",
+            body: JSON.stringify(contact),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((error) => console.log(error));
+        }
+      },
+      addData: (contact) => {
+        const gender = ["men", "women"];
+        contact.gender = gender[Math.floor(Math.random() * 2)];
+        contact.img = Math.floor(Math.random() * 99 + 1);
+
+        const store = { contactList: [contact, ...getStore().contactList] };
         setStore(store);
-        
+        getActions().fetchMethods("add", contact);
       },
       modifyData: (contact, param) => {
         const store = getStore();
@@ -54,23 +104,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         setStore(store);
       },
-      addData: (contact) => {
-        const gender = ["men", "women"];
-        contact.gender = gender[Math.floor(Math.random() * 2)];
-        contact.img = Math.floor(Math.random() * 99 + 1);
-
+      deleteData: (id) => {
         const store = getStore();
-        setStore({ contactList: [contact, ...store.contactList] });
+        store.contactList = store.contactList.filter((_, i) => i !== id);
+
+        setStore(store);
       },
+
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
-      loadSomeData: () => {
-        /**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-      },
+
       changeColor: (index, color) => {
         //get the store
         const store = getStore();
