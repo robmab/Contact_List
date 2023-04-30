@@ -25,6 +25,7 @@ export const Home = () => {
           setContacts={setContacts}
           key={y}
           id={y}
+          idAPI={x.id}
           full_name={x.full_name}
           email={x.email}
           phone={x.phone}

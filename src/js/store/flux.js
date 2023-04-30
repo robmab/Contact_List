@@ -42,14 +42,27 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       fetchMethods: (method, contact) => {
-        if (method === "get") {
+        if (method === "get" || method === "addContact") {
+          let store;
           fetch("https://assets.breatheco.de/apis/fake/contact/agenda/robmab")
             .then((res) => {
               if (!res.ok) throw Error(res.ok);
               return res.json();
             })
             .then((data) => {
-              const store = getStore();
+              store = getStore();
+
+              if (method === "addContact") {
+                const [full_name, img, gender] =
+                  data[data.length - 1].full_name.split("|"); //:O
+                data[data.length - 1].full_name = full_name;
+                data[data.length - 1].img = img;
+                data[data.length - 1].gender = gender;
+console.log(data[data.length - 1]);
+                store.contactList.unshift(data[data.length - 1]);
+                setStore(store);
+                return;
+              }
 
               data.forEach((item) => {
                 const [full_name, img, gender] = item.full_name.split("|"); //:O
@@ -67,7 +80,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         if (method === "post") {
           contact.full_name =
-            contact.full_name + "|" + contact.img + "|" + contact.gender;
+            contact.full_name[0].toUpperCase() +
+            contact.full_name.slice(1) +
+            "|" +
+            contact.img +
+            "|" +
+            contact.gender;
 
           fetch("https://assets.breatheco.de/apis/fake/contact/", {
             method: "POST",
@@ -87,7 +105,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
 
         if (method === "delete") {
-          const id = contact
+          const id = contact;
 
           fetch(`https://assets.breatheco.de/apis/fake/contact/${id}`, {
             method: "DELETE",
@@ -110,8 +128,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         getActions().fetchMethods("post", contact);
 
         setTimeout(() => {
-          getActions().fetchMethods("get"); //Load id data from API, it need delay because it dont get data from updated contact
+          getActions().fetchMethods("addContact");
         }, 600);
+        /* Load id data from API, 
+        it need delay because it dont get data from updated contact */
       },
       modifyData: (contact, param) => {
         const store = getStore();
@@ -126,7 +146,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       deleteData: (id) => {
         const store = getStore();
         store.contactList.forEach((x, y) => {
-          if (y == id) getActions().fetchMethods("delete", x.id);
+          if (y === id) getActions().fetchMethods("delete", x.id);
         });
         store.contactList = store.contactList.filter((_, i) => i !== id);
 

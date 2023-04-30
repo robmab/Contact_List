@@ -25,7 +25,7 @@ export const Contact = (props) => {
   };
 
   return (
-    <div id={props.id} className="contact">
+    <div id={props.idAPI} className="contact">
       {/* CONTACT */}
       <div className="contact-left">
         <img
