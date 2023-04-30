@@ -42,7 +42,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       fetchMethods: (method, contact) => {
-        if (method === "get" || method === "addContact") {
+        if (method === "get") {
           let store;
           fetch("https://assets.breatheco.de/apis/fake/contact/agenda/robmab")
             .then((res) => {
@@ -52,25 +52,22 @@ const getState = ({ getStore, getActions, setStore }) => {
             .then((data) => {
               store = getStore();
 
-              if (method === "addContact") {
-                const [full_name, img, gender] =
-                  data[data.length - 1].full_name.split("|"); //:O
-                data[data.length - 1].full_name = full_name;
-                data[data.length - 1].img = img;
-                data[data.length - 1].gender = gender;
-console.log(data[data.length - 1]);
-                store.contactList.unshift(data[data.length - 1]);
-                setStore(store);
-                return;
-              }
-
               data.forEach((item) => {
-                const [full_name, img, gender] = item.full_name.split("|"); //:O
-                item.full_name = full_name;
-                item.img = img;
-                item.gender = gender;
+                /* CONTROL REPEATED CONTACTS */
+                let aux = false;
+                store.contactList.forEach((itemStore) => {
+                  if (itemStore.id == item.id) {
+                    aux = true;
+                  }
+                });
 
-                store.contactList.unshift(item);
+                if (!aux) {
+                  const [full_name, img, gender] = item.full_name.split("|"); //:O
+                  item.full_name = full_name;
+                  item.img = img;
+                  item.gender = gender;
+                  store.contactList.unshift(item);
+                } else aux = false;
               });
 
               setStore(store);
@@ -128,7 +125,7 @@ console.log(data[data.length - 1]);
         getActions().fetchMethods("post", contact);
 
         setTimeout(() => {
-          getActions().fetchMethods("addContact");
+          getActions().fetchMethods("get");
         }, 600);
         /* Load id data from API, 
         it need delay because it dont get data from updated contact */
