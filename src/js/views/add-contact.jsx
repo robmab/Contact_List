@@ -41,6 +41,10 @@ export const AddContact = () => {
       return;
     }
 
+    /* when modify data, only check email when email value change */
+    if (param && store.contactList[param].email === emailValue);
+    else actions.checkEmail(emailValue);
+
     if (phoneValue === "") {
       alert("Add phone please.");
       return;
