@@ -66,7 +66,7 @@ export const AddContact = () => {
 
     if (param) actions.modifyData(contactData, param);
     else actions.addData(contactData);
-    
+
     navigate("/"); //redirect onSubmit
   };
 
@@ -80,7 +80,15 @@ export const AddContact = () => {
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Full Name</label>
             <input
-              onChange={(e) => setnameValue(e.target.value)} //control input
+              onChange={(e) => {
+                const upperCase = e.target.value
+                  .split(" ")
+                  .map((x) => {
+                    return x.charAt(0).toUpperCase() + x.slice(1);
+                  })
+                  .join(" ");
+                setnameValue(upperCase);
+              }} //control input
               value={nameValue}
               type="text"
               className="form-control"

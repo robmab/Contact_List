@@ -13,13 +13,15 @@
 .wrapper-home {
   display: flex;
   flex-direction: column;
+
   width: 58rem;
+  margin-bottom: 1em;
 }
 
 .wrapper-home > a {
-  margin: 10px 0 15px auto;
+  margin: 10px 0 15px auto; /* ms-auto */
   color: white;
-  text-decoration: none; /* ms-auto */
+  text-decoration: none;
 }
 
 .wrapper-home > div:nth-child(2) {

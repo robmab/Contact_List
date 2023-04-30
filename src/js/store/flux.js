@@ -1,44 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      contactList: [
-        /* {
-          full_name: "Mike Anamendolla",
-          email: "mike.ana@example.com",
-          phone: "(870) 288-4149",
-          address: "5842 Hillcrest Rd",
-          gender: "men",
-          img: "10",
-          agenda_slug: "robmab",
-        },
-        {
-          full_name: "Prueba",
-          email: "mike.ana@example.com",
-          phone: "(870) 288-4149",
-          address: "5842 Hillcrest Rd",
-          gender: "women",
-          img: "8",
-          agenda_slug: "robmab",
-        },
-        {
-          full_name: "Mike Anamendolla",
-          email: "mike.ana@example.com",
-          phone: "(870) 288-4149",
-          address: "5842 Hillcrest Rd",
-          gender: "men",
-          img: "63",
-          agenda_slug: "robmab",
-        },
-        {
-          full_name: "Mike Anamendolla",
-          email: "mike.ana@example.com",
-          phone: "(870) 288-4149",
-          address: "5842 Hillcrest Rd",
-          gender: "women",
-          img: "39",
-          agenda_slug: "robmab",
-        }, */
-      ],
+      contactList: [],
     },
     actions: {
       fetchMethods: (method, contact) => {
@@ -77,12 +40,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         if (method === "post") {
           contact.full_name =
-            contact.full_name[0].toUpperCase() +
-            contact.full_name.slice(1) +
-            "|" +
-            contact.img +
-            "|" +
-            contact.gender;
+            contact.full_name + "|" + contact.img + "|" + contact.gender;
 
           fetch("https://assets.breatheco.de/apis/fake/contact/", {
             method: "POST",
@@ -99,6 +57,30 @@ const getState = ({ getStore, getActions, setStore }) => {
               console.log(data);
             })
             .catch((error) => console.log(error));
+        }
+
+        if (method === "put") {
+          const id = contact.id;
+          const originalFullName = contact.full_name;
+          contact.full_name =
+            contact.full_name + "|" + contact.img + "|" + contact.gender;
+
+          fetch(`https://assets.breatheco.de/apis/fake/contact/${id}`, {
+            method: "PUT",
+            body: JSON.stringify(contact),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => {
+              if (!res.ok) throw Error(res.ok);
+              return res.json();
+            })
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((error) => console.log(error));
+          contact.full_name = originalFullName; //revert for show name as design on store
         }
 
         if (method === "delete") {
@@ -135,10 +117,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         contact.gender = store.contactList[param].gender;
         contact.img = store.contactList[param].img;
+        contact.created_at = store.contactList[param].created_at;
+        contact.id = store.contactList[param].id;
 
         store.contactList[param] = contact;
-
         setStore(store);
+        getActions().fetchMethods("put", contact);
       },
       deleteData: (id) => {
         const store = getStore();

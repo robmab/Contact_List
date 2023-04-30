@@ -119,4 +119,4 @@ export const Contact = (props) => {
 /* Para que el modal detecte el id del contacto al darle a borrar,
  es necesario que el identificador del propio modal sea único, 
  por lo que aprovechamos el id de props para asociarlo tanto a 
- aria-labelledby como al id del modal y asi que el modal sea único. */
+ aria-labelledby como al id del modal. */
