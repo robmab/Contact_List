@@ -65,7 +65,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             .catch((error) => console.log(error));
         }
 
-        if (method === "add") {
+        if (method === "post") {
           contact.full_name =
             contact.full_name + "|" + contact.img + "|" + contact.gender;
 
@@ -107,7 +107,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         contact.gender = gender[Math.floor(Math.random() * 2)];
         contact.img = Math.floor(Math.random() * 99 + 1);
 
-        getActions().fetchMethods("add", contact);
+        getActions().fetchMethods("post", contact);
 
         setTimeout(() => {
           getActions().fetchMethods("get"); //Load id data from API, it need delay because it dont get data from updated contact
