@@ -28,7 +28,7 @@ export const AddContact = () => {
         setaddressValue(store.contactList[param].address);
 
         clearTimeout(timeOut);
-      }, 500);
+      }, 1000);
     }
   }, []);
 
@@ -133,6 +133,8 @@ export const AddContact = () => {
               placeholder={
                 param && Object.keys(store.contactList).length !== 0
                   ? store.contactList[param].full_name
+                  : param && Object.keys(store.contactList).length === 0
+                  ? ""
                   : "Full Name"
               }
             />
@@ -164,6 +166,8 @@ export const AddContact = () => {
               placeholder={
                 param && Object.keys(store.contactList).length !== 0
                   ? store.contactList[param].email
+                  : param && Object.keys(store.contactList).length === 0
+                  ? ""
                   : "Enter email"
               }
             />
@@ -184,6 +188,8 @@ export const AddContact = () => {
               placeholder={
                 param && Object.keys(store.contactList).length !== 0
                   ? store.contactList[param].phone
+                  : param && Object.keys(store.contactList).length === 0
+                  ? ""
                   : "Enter phone"
               }
             />
@@ -204,6 +210,8 @@ export const AddContact = () => {
               placeholder={
                 param && Object.keys(store.contactList).length !== 0
                   ? store.contactList[param].address
+                  : param && Object.keys(store.contactList).length === 0
+                  ? ""
                   : "Enter address"
               }
             />
