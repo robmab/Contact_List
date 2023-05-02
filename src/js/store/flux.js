@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+const agenda = "robmab";
 
 const getState = ({ getStore, getActions, setStore }) => {
   return {
@@ -9,7 +9,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       fetchMethods: (method, contact) => {
         if (method === "get") {
           let store;
-          fetch("https://assets.breatheco.de/apis/fake/contact/agenda/robmab")
+          fetch(
+            `https://assets.breatheco.de/apis/fake/contact/agenda/${agenda}`
+          )
             .then((res) => {
               if (!res.ok) throw Error(res.ok);
               return res.json();
@@ -29,8 +31,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                 if (!aux) {
                   const [full_name, img, gender] = item.full_name.split("|"); //:O
                   item.full_name = full_name;
-                  item.img = img;
-                  item.gender = gender;
+                  item.img = img !== "undefined" ? img : undefined;
+                  item.gender = gender !== "undefined" ? gender : undefined;
                   store.contactList.unshift(item);
                 } else aux = false;
               });
@@ -137,7 +139,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       checkEmail: (email, setAlert, setAlertText, setCheckEmail) => {
         let check = false;
-        fetch("https://assets.breatheco.de/apis/fake/contact/agenda/robmab")
+        fetch(`https://assets.breatheco.de/apis/fake/contact/agenda/${agenda}`)
           .then((res) => {
             if (!res.ok) throw Error(res.ok);
             return res.json();

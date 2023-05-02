@@ -23,13 +23,15 @@ export const Contact = (props) => {
     actions.deleteData(Number(e.target.id));
     props.setContacts(store.contactList);
   };
-
+  console.log(props);
   return (
     <div id={props.idAPI} className="contact">
       {/* CONTACT */}
       <div className="contact-left">
         <img
-          src={`https://randomuser.me/api/portraits/${props.gender}/${props.img}.jpg`}
+          src={`https://randomuser.me/api/portraits/${
+            props.gender != undefined ? props.gender : "men"
+          }/${props.img != undefined ? props.img : "9"}.jpg`}
           alt=""
         />
       </div>
