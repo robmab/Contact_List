@@ -135,7 +135,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         setStore(store);
       },
-      checkEmail: (email) => {
+      checkEmail: (email, setAlert, setAlertText, setCheckEmail) => {
         let check = false;
         fetch("https://assets.breatheco.de/apis/fake/contact/agenda/robmab")
           .then((res) => {
@@ -148,14 +148,16 @@ const getState = ({ getStore, getActions, setStore }) => {
             });
 
             if (check) {
-              alert("Email taken, please choose another one");
+              setAlert(true);
+              setAlertText("Email taken, please choose another one.");
+            } else {
+              setAlert(false);
             }
-           
           })
 
           .catch((error) => console.log(error));
 
-          return check
+        return check;
       },
     },
   };
