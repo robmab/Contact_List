@@ -24,6 +24,11 @@
   text-decoration: none;
 }
 
-.wrapper-home > div:nth-child(2) {
+.wrapper-home > ul > li:nth-child(1) > div {
   border-top: 2px rgba(199, 199, 199, 0.362) solid !important;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
 }

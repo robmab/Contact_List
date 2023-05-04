@@ -8,8 +8,6 @@ import { Contact } from "../component/contact.jsx";
 
 //create your first component
 
-
-
 export const Home = () => {
   const { store } = useContext(Context);
 
@@ -19,21 +17,22 @@ export const Home = () => {
       <Link className="btn btn-success" to="add-contact">
         Add new contact
       </Link>
-
-      {contacts.map((x, y) => (
-        <Contact
-          setContacts={setContacts}
-          key={y}
-          id={y}
-          idAPI={x.id}
-          full_name={x.full_name}
-          email={x.email}
-          phone={x.phone}
-          address={x.address}
-          gender={x.gender}
-          img={x.img}
-        />
-      ))}
+      <ul>
+        {contacts.map((x, y) => (
+          <Contact
+            setContacts={setContacts}
+            key={y}
+            id={y}
+            idAPI={x.id}
+            full_name={x.full_name}
+            email={x.email}
+            phone={x.phone}
+            address={x.address}
+            gender={x.gender}
+            img={x.img}
+          />
+        ))}
+      </ul>
     </div>
   );
 };

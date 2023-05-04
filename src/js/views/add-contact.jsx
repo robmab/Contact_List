@@ -18,6 +18,8 @@ export const AddContact = () => {
   const param =
     Object.keys(useParams()).length !== 0 ? useParams().theid : false;
 
+    console.log(useParams());
+
   useEffect(() => {
     if (Object.keys(store.contactList).length === 0) {
       actions.fetchMethods("get");
