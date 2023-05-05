@@ -18,6 +18,12 @@
   margin-bottom: 1em;
 }
 
+@media(max-width:720px){
+  .wrapper-home{
+   width: auto;
+  }
+}
+
 .wrapper-home > a {
   margin: 10px 0 15px auto; /* ms-auto */
   color: white;
@@ -31,4 +37,22 @@
 ul {
   list-style-type: none;
   padding: 0;
+}
+
+/* LOADING */
+
+.loading {
+  border: 2px rgba(199, 199, 199, 0.362) solid;
+  background-color: red;
+  margin: 0 auto;
+  width: 8em;
+  border-radius: 2px;
+}
+
+.loading p {
+  text-align: center;
+  font-size: larger;
+  font-weight: 700;
+  margin: 0;
+  color: aliceblue;
 }

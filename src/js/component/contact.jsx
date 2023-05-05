@@ -18,10 +18,10 @@ import {
 //create your first component
 export const Contact = (props) => {
   return (
-    <li>
-      <div id={props.idAPI} className="contact">
+    <li className="container-flex">
+      <div id={props.idAPI} className="contact row">
         {/* CONTACT */}
-        <div className="contact-left">
+        <div className="contact-left col-12 col-md-2">
           <img
             src={`https://randomuser.me/api/portraits/${
               props.gender != undefined ? props.gender : "men"
@@ -29,34 +29,38 @@ export const Contact = (props) => {
             alt=""
           />
         </div>
-        <div className="contact-center">
+        <div className="contact-center col-12 col-md-8">
           <h1>{props.full_name}</h1>
-          <p>
-            <FontAwesomeIcon icon={faLocationDot} />
+          <div className="contact-content">
+            <p>
+              <FontAwesomeIcon icon={faLocationDot} />
 
-            {props.address}
-          </p>
-          <p>
-            <FontAwesomeIcon icon={faPhoneFlip} />
-            {props.phone}
-          </p>
-          <p>
-            <FontAwesomeIcon icon={faEnvelope} />
-            {props.email}
-          </p>
+              {props.address}
+            </p>
+            <p>
+              <FontAwesomeIcon icon={faPhoneFlip} />
+              {props.phone}
+            </p>
+            <p>
+              <FontAwesomeIcon icon={faEnvelope} />
+              {props.email}
+            </p>
+          </div>
         </div>
-        <div className="contact-rigth">
-          <Link to={`/add-contact/${props.id}`} /* state={{ data: props }} */>
-            <FontAwesomeIcon icon={faPencil} />
-          </Link>
-          <a
-            id={props.id}
-            href=""
-            data-bs-toggle="modal"
-            data-bs-target={"#exampleModal" + props.id}
-          >
-            <FontAwesomeIcon icon={faTrashCan} />
-          </a>
+        <div className="contact-rigth col-12 col-md-2">
+          <div className="contact-actions">
+            <Link to={`/add-contact/${props.id}`} /* state={{ data: props }} */>
+              <FontAwesomeIcon icon={faPencil} />
+            </Link>
+            <a
+              id={props.id}
+              href=""
+              data-bs-toggle="modal"
+              data-bs-target={"#exampleModal" + props.id}
+            >
+              <FontAwesomeIcon icon={faTrashCan} />
+            </a>
+          </div>
         </div>
         {/* CONTACT END*/}
         {/* MODAL */}

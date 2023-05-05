@@ -52,3 +52,22 @@
   background-color: rgba(77, 77, 77, 0.501);
   border: 0;
 }
+
+@media (max-width: 720px) {
+  .wrapper-formulary {
+    margin-top: 5em;
+    width: 60%;
+    scale: 1.4;
+  }
+  .wrapper-formulary h1 {
+    font-size: 1.6em;
+    margin: 3em auto 1em 0 !important;
+  }
+  .wrapper-formulary button {
+    margin-bottom: 1em;
+  }
+
+  .form-group > input {
+    font-size: 0.9em;
+  }
+}

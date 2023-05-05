@@ -1,4 +1,3 @@
-
 /* CONTACT */
 .contact {
   display: flex;
@@ -9,40 +8,45 @@
   padding: 13px;
 }
 
-
 .contact-left {
-  
   padding: 0 60px 0 35px;
   user-select: none;
 }
 .contact-left > img {
-  
   border-radius: 50%;
-  
+}
+.contact-center {
+  padding-left: 4.5rem;
 }
 
 .contact-center > h1 {
   font-size: 20px;
   margin-bottom: 10px;
 }
-.contact-center > p > svg {
+.contact-actions {
+  display: flex;
+
+  width: 5.5em;
+}
+
+.contact-content > p > svg {
   margin-right: 15px;
   font-size: 16px !important;
   color: #747679;
 }
 
-.contact-center > p {
+.contact-content > p {
   color: #85888b;
   margin-right: 15px;
   font-weight: 700;
   margin: 0;
   padding: 0;
 }
-.contact-center > p:nth-child(3) {
+.contact-content > p:nth-child(3) {
   margin-top: 5px;
   font-size: 14px;
 }
-.contact-center > p:nth-child(4) {
+.contact-content > p:nth-child(4) {
   margin-top: 5px;
   font-size: 13px;
 }
@@ -54,10 +58,11 @@
 }
 
 .contact-rigth a:nth-child(1) {
-  margin-right: 35px;
+  margin-left: auto;
+  margin-right: 2em;
 }
 .contact-rigth a:nth-child(2) {
-  margin-right: 30px;
+  margin-left: auto;
 }
 
 .contact-rigth a {
@@ -66,3 +71,41 @@
   width: 19px;
 }
 
+@media (max-width: 720px) {
+  .contact-left,
+  .contact-center {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-rigth {
+    display: flex;
+  }
+  .contact-left * {
+    margin: 1em auto 1em;
+    width: 14em;
+  }
+
+  .contact-center {
+    padding: 0 2em;
+  }
+
+  .contact-center h1 {
+    font-size: 1.5em;
+    margin: 0.5em auto 0.7em auto;
+    padding-right: 0.5em;
+  }
+
+  .contact-center p {
+    font-size: larger;
+  }
+  .contact-rigth * {
+    margin: 0.7em auto 0;
+    font-size: 1.1em;
+  }
+
+  .wrapper-home a{
+    margin: 1em auto;
+    font-size: 1.5em;
+  }
+}

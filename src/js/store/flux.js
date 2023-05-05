@@ -9,6 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       fetchMethods: (method, contact) => {
         if (method === "get") {
           let store;
+
           fetch(
             `https://assets.breatheco.de/apis/fake/contact/agenda/${agenda}`
           )
@@ -18,6 +19,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             })
             .then((data) => {
               store = getStore();
+              store.charged = true;
+              setStore(store);
 
               data.forEach((item) => {
                 /* CONTROL REPEATED CONTACTS */
@@ -110,11 +113,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         getActions().fetchMethods("post", contact);
 
+        const store = getStore();
+        delete store.charged
+
         setTimeout(() => {
           getActions().fetchMethods("get");
-        }, 600);
+        }, 1000);
         /* Load id data from API, 
-        it need delay because it dont get data from updated contact */
+        need delay for correct store update */
       },
       modifyData: (contact, param) => {
         const store = getStore();
