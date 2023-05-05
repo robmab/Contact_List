@@ -71,3 +71,9 @@
     font-size: 0.9em;
   }
 }
+
+@media (min-width: 720px) and (max-width:900px) {
+  .wrapper-formulary {
+    width: 90%;
+  }
+}

@@ -18,12 +18,6 @@
   margin-bottom: 1em;
 }
 
-@media(max-width:720px){
-  .wrapper-home{
-   width: auto;
-  }
-}
-
 .wrapper-home > a {
   margin: 10px 0 15px auto; /* ms-auto */
   color: white;
@@ -55,4 +49,16 @@ ul {
   font-weight: 700;
   margin: 0;
   color: aliceblue;
+}
+
+@media (max-width: 720px) {
+  .wrapper-home {
+    width: auto;
+  }
+}
+
+@media (min-width: 720px) and (max-width: 900px) {
+  .wrapper-home {
+    width: 90%;
+  }
 }
