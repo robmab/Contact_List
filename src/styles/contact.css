@@ -104,9 +104,13 @@
     font-size: 1.1em;
   }
 
-  .wrapper-home a{
+  .contact-actions {
+    margin: 0 auto;
+    padding-right: 6.8em;
+  }
+
+  .wrapper-home a {
     margin: 1em auto;
     font-size: 1.5em;
   }
 }
-

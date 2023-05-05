@@ -39,7 +39,7 @@ ul {
   border: 2px rgba(199, 199, 199, 0.362) solid;
   background-color: red;
   margin: 0 auto;
-  width: 8em;
+  width: 100%;
   border-radius: 2px;
 }
 
