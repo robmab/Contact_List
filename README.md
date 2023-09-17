@@ -9,10 +9,10 @@
 - Delete contacts
   
 > [!IMPORTANT]
-> All these functions are done both locally and in the api, to reduce unnecessary load on the server.
+> All these functions are done both locally and in the api, to reduce unnecessary load on the server
 
 > [!NOTE]
-> Images and gender of contacts are saved randomly.
+> Images and gender of contacts are saved randomly through randomuser.me
 
 ### Responsive
 
