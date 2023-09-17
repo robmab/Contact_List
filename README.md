@@ -10,6 +10,9 @@
 
 > All these functions are done both locally and in the api, to reduce unnecessary load on the server.
 
+> [!NOTE]
+> Images and gender of contacts are saved randomly.
+
 ### Responsive
 
 ![Proyecto sin título](https://github.com/robmab/Contact_List/assets/56076087/26284798-5066-42f5-bfab-81720e50e5d9)
