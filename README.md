@@ -7,7 +7,8 @@
 - Add contacts
 - Modify contacts
 - Delete contacts
-
+  
+> [!IMPORTANT]
 > All these functions are done both locally and in the api, to reduce unnecessary load on the server.
 
 > [!NOTE]
